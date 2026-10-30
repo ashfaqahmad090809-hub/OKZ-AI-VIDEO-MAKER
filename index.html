@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OKZ AI Video Maker</title>
+<title>OKZ AI VIDEO MAKER</title>
 
 <style>
 * {
@@ -14,76 +14,59 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #080b18;
+  background: #090914;
   color: white;
+  min-height: 100vh;
+  padding: 25px 15px;
 }
 
-header {
-  padding: 22px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #252a40;
-}
-
-.logo {
-  font-size: 25px;
-  font-weight: bold;
-  color: #8b7cff;
-}
-
-.hero {
-  text-align: center;
-  padding: 65px 20px 30px;
+.container {
+  max-width: 750px;
+  margin: 40px auto;
+  background: #151527;
+  padding: 30px;
+  border-radius: 20px;
+  border: 1px solid #333354;
 }
 
 h1 {
-  font-size: 38px;
+  text-align: center;
+  color: #a78bfa;
+  font-size: 32px;
 }
 
-.highlight {
-  color: #947fff;
+.subtitle {
+  text-align: center;
+  color: #aaa;
+  margin-bottom: 30px;
 }
 
-.hero p {
-  color: #aab0c5;
+label {
+  display: block;
+  margin: 18px 0 8px;
+  font-weight: bold;
 }
 
-.generator {
-  max-width: 650px;
-  margin: 20px auto;
-  padding: 25px;
-  background: #151a2e;
-  border-radius: 18px;
+textarea, select {
+  width: 100%;
+  padding: 14px;
+  background: #090914;
+  border: 1px solid #444466;
+  color: white;
+  border-radius: 10px;
+  font-size: 16px;
 }
 
 textarea {
-  width: 100%;
-  height: 130px;
-  padding: 15px;
-  background: #090e20;
-  color: white;
-  border: 1px solid #414766;
-  border-radius: 10px;
-  font-size: 16px;
+  min-height: 120px;
   resize: vertical;
-}
-
-select {
-  width: 100%;
-  padding: 13px;
-  margin-top: 15px;
-  background: #090e20;
-  color: white;
-  border: 1px solid #414766;
-  border-radius: 8px;
 }
 
 button {
   width: 100%;
-  margin-top: 18px;
   padding: 15px;
-  background: #7865ff;
+  margin-top: 22px;
+  background: linear-gradient(90deg, #7c3aed, #a855f7);
   color: white;
   border: none;
   border-radius: 10px;
@@ -93,71 +76,162 @@ button {
 }
 
 button:hover {
-  background: #604ce8;
+  opacity: 0.9;
 }
 
-#message {
-  text-align: center;
-  color: #b6aaff;
-  margin-top: 20px;
+#result {
+  display: none;
+  margin-top: 25px;
+  padding: 20px;
+  background: #090914;
+  border: 1px solid #444466;
+  border-radius: 12px;
+  white-space: pre-wrap;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
 }
 
-footer {
+.secondary {
+  background: #292943;
+  margin-top: 12px;
+}
+
+.footer {
   text-align: center;
-  padding: 35px;
-  color: #858ba5;
+  color: #777;
+  margin-top: 25px;
+  font-size: 13px;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-  <div class="logo">OKZ AI</div>
-  <div>AI VIDEO MAKER</div>
-</header>
+<div class="container">
 
-<section class="hero">
-  <h1>Create Videos With <span class="highlight">AI</span></h1>
-  <p>Turn your creative ideas into amazing videos.</p>
-</section>
+<h1>OKZ AI VIDEO MAKER</h1>
 
-<div class="generator">
-  <h2>🎬 AI Video Generator</h2>
+<p class="subtitle">
+Create Amazing AI Video Ideas In Seconds
+</p>
 
-  <textarea id="prompt"
-    placeholder="Describe your video idea..."></textarea>
+<label for="idea">Enter Your Video Idea</label>
+<textarea id="idea"
+placeholder="Example: A futuristic city in the year 2050..."></textarea>
 
-  <select id="ratio">
-    <option value="16:9">Landscape (16:9)</option>
-    <option value="9:16">Portrait (9:16)</option>
-    <option value="1:1">Square (1:1)</option>
-  </select>
+<label for="style">Select Video Style</label>
+<select id="style">
+  <option>Cinematic</option>
+  <option>Realistic</option>
+  <option>Anime</option>
+  <option>3D Animation</option>
+  <option>Fantasy</option>
+  <option>Documentary</option>
+</select>
 
-  <button onclick="generateVideo()">
-    ✨ Generate Video
-  </button>
+<label for="ratio">Select Video Ratio</label>
+<select id="ratio">
+  <option value="16:9">16:9 - YouTube</option>
+  <option value="9:16">9:16 - TikTok / Reels</option>
+  <option value="1:1">1:1 - Square</option>
+</select>
 
-  <div id="message"></div>
+<label for="duration">Select Video Duration</label>
+<select id="duration">
+  <option value="15 seconds">15 Seconds</option>
+  <option value="30 seconds">30 Seconds</option>
+  <option value="60 seconds">60 Seconds</option>
+</select>
+
+<button onclick="generateVideo()">
+Generate Video Idea
+</button>
+
+<div id="result"></div>
+
+<button id="downloadBtn" class="secondary"
+style="display:none" onclick="downloadResult()">
+Download Storyboard
+</button>
+
+<p class="footer">
+Powered by OKZ AI VIDEO MAKER
+</p>
+
 </div>
 
-<footer>
-  © 2026 OKZ AI Video Maker
-</footer>
-
 <script>
-function generateVideo() {
-  const prompt = document.getElementById("prompt").value.trim();
-  const ratio = document.getElementById("ratio").value;
-  const message = document.getElementById("message");
+let generatedText = "";
 
-  if (!prompt) {
-    message.innerText = "Please describe your video first!";
+function generateVideo() {
+  const idea = document.getElementById("idea").value.trim();
+  const style = document.getElementById("style").value;
+  const ratio = document.getElementById("ratio").value;
+  const duration = document.getElementById("duration").value;
+
+  if (!idea) {
+    alert("Please enter your video idea first!");
     return;
   }
 
-  message.innerText =
-    "Your video idea is ready! Connect an AI video API to generate the actual video. Aspect ratio: " + ratio;
+  generatedText =
+`OKZ AI VIDEO MAKER
+==================
+
+VIDEO IDEA:
+${idea}
+
+VIDEO STYLE:
+${style}
+
+VIDEO RATIO:
+${ratio}
+
+VIDEO DURATION:
+${duration}
+
+AI VIDEO PROMPT:
+Create a ${style.toLowerCase()} video about ${idea}.
+Use a ${ratio} aspect ratio.
+Duration: ${duration}.
+Use beautiful visuals, smooth camera movements,
+professional lighting and high-quality details.
+
+STORYBOARD:
+
+SCENE 1 - INTRODUCTION
+Introduce the main idea with an attractive opening shot.
+
+SCENE 2 - DEVELOPMENT
+Show the main action with interesting camera angles.
+
+SCENE 3 - HIGHLIGHT
+Show the most exciting moment with cinematic visuals.
+
+SCENE 4 - ENDING
+Finish with a memorable final shot.
+`;
+
+  const result = document.getElementById("result");
+  result.textContent = generatedText;
+  result.style.display = "block";
+
+  document.getElementById("downloadBtn").style.display = "block";
+}
+
+function downloadResult() {
+  const blob = new Blob([generatedText], {
+    type: "text/plain"
+  });
+
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+
+  link.href = url;
+  link.download = "OKZ-AI-Storyboard.txt";
+  link.click();
+
+  URL.revokeObjectURL(url);
 }
 </script>
 
