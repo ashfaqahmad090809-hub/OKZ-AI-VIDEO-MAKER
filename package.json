@@ -1,0 +1,9 @@
+{
+  "name": "okz-ai-video-maker",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@huggingface/inference": "^4.0.0"
+  }
+}
