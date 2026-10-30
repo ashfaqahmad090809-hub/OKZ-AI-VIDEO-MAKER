@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OKZ AI Video Maker</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #080b18;
+  color: white;
+}
+
+header {
+  padding: 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #252a40;
+}
+
+.logo {
+  font-size: 25px;
+  font-weight: bold;
+  color: #8b7cff;
+}
+
+.hero {
+  text-align: center;
+  padding: 65px 20px 30px;
+}
+
+h1 {
+  font-size: 38px;
+}
+
+.highlight {
+  color: #947fff;
+}
+
+.hero p {
+  color: #aab0c5;
+}
+
+.generator {
+  max-width: 650px;
+  margin: 20px auto;
+  padding: 25px;
+  background: #151a2e;
+  border-radius: 18px;
+}
+
+textarea {
+  width: 100%;
+  height: 130px;
+  padding: 15px;
+  background: #090e20;
+  color: white;
+  border: 1px solid #414766;
+  border-radius: 10px;
+  font-size: 16px;
+  resize: vertical;
+}
+
+select {
+  width: 100%;
+  padding: 13px;
+  margin-top: 15px;
+  background: #090e20;
+  color: white;
+  border: 1px solid #414766;
+  border-radius: 8px;
+}
+
+button {
+  width: 100%;
+  margin-top: 18px;
+  padding: 15px;
+  background: #7865ff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #604ce8;
+}
+
+#message {
+  text-align: center;
+  color: #b6aaff;
+  margin-top: 20px;
+}
+
+footer {
+  text-align: center;
+  padding: 35px;
+  color: #858ba5;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">OKZ AI</div>
+  <div>AI VIDEO MAKER</div>
+</header>
+
+<section class="hero">
+  <h1>Create Videos With <span class="highlight">AI</span></h1>
+  <p>Turn your creative ideas into amazing videos.</p>
+</section>
+
+<div class="generator">
+  <h2>🎬 AI Video Generator</h2>
+
+  <textarea id="prompt"
+    placeholder="Describe your video idea..."></textarea>
+
+  <select id="ratio">
+    <option value="16:9">Landscape (16:9)</option>
+    <option value="9:16">Portrait (9:16)</option>
+    <option value="1:1">Square (1:1)</option>
+  </select>
+
+  <button onclick="generateVideo()">
+    ✨ Generate Video
+  </button>
+
+  <div id="message"></div>
+</div>
+
+<footer>
+  © 2026 OKZ AI Video Maker
+</footer>
+
+<script>
+function generateVideo() {
+  const prompt = document.getElementById("prompt").value.trim();
+  const ratio = document.getElementById("ratio").value;
+  const message = document.getElementById("message");
+
+  if (!prompt) {
+    message.innerText = "Please describe your video first!";
+    return;
+  }
+
+  message.innerText =
+    "Your video idea is ready! Connect an AI video API to generate the actual video. Aspect ratio: " + ratio;
+}
+</script>
+
+</body>
+</html>
