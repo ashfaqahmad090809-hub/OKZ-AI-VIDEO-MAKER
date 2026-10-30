@@ -5,235 +5,141 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OKZ AI VIDEO MAKER</title>
-
 <style>
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #090914;
-  color: white;
-  min-height: 100vh;
-  padding: 25px 15px;
-}
-
-.container {
-  max-width: 750px;
-  margin: 40px auto;
-  background: #151527;
-  padding: 30px;
-  border-radius: 20px;
-  border: 1px solid #333354;
-}
-
-h1 {
-  text-align: center;
-  color: #a78bfa;
-  font-size: 32px;
-}
-
-.subtitle {
-  text-align: center;
-  color: #aaa;
-  margin-bottom: 30px;
-}
-
-label {
-  display: block;
-  margin: 18px 0 8px;
-  font-weight: bold;
-}
-
-textarea, select {
-  width: 100%;
-  padding: 14px;
-  background: #090914;
-  border: 1px solid #444466;
-  color: white;
-  border-radius: 10px;
-  font-size: 16px;
-}
-
-textarea {
-  min-height: 120px;
-  resize: vertical;
-}
-
-button {
-  width: 100%;
-  padding: 15px;
-  margin-top: 22px;
-  background: linear-gradient(90deg, #7c3aed, #a855f7);
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-size: 17px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-button:hover {
-  opacity: 0.9;
-}
-
-#result {
-  display: none;
-  margin-top: 25px;
-  padding: 20px;
-  background: #090914;
-  border: 1px solid #444466;
-  border-radius: 12px;
-  white-space: pre-wrap;
-  line-height: 1.7;
-  overflow-wrap: anywhere;
-}
-
-.secondary {
-  background: #292943;
-  margin-top: 12px;
-}
-
-.footer {
-  text-align: center;
-  color: #777;
-  margin-top: 25px;
-  font-size: 13px;
-}
+*{box-sizing:border-box}
+body{margin:0;padding:20px;background:#090914;color:white;font-family:Arial,sans-serif}
+.container{max-width:700px;margin:auto}
+h1{text-align:center;color:#65a4ff}
+.subtitle{text-align:center;color:#aaa}
+.panel{background:#17172a;padding:20px;border-radius:16px;margin-top:20px}
+label{display:block;margin:15px 0 7px}
+input,select,textarea{width:100%;padding:13px;border-radius:9px;border:1px solid #444;background:#24243a;color:white;font-size:16px}
+textarea{min-height:100px}
+button{width:100%;padding:14px;margin-top:15px;border:0;border-radius:10px;background:#367cf5;color:white;font-size:16px;font-weight:bold}
+button.secondary{background:#34344d}
+#output{white-space:pre-wrap;line-height:1.6;color:#ddd}
+.notice{color:#ffc96b;font-size:14px;line-height:1.5}
 </style>
 </head>
-
 <body>
-
 <div class="container">
+<h1>🎬 OKZ AI VIDEO MAKER</h1>
+<p class="subtitle">Create your video ideas and storyboards</p>
 
-<h1>OKZ AI VIDEO MAKER</h1>
+<div class="panel">
+<label>Video Idea</label>
+<textarea id="idea" placeholder="Describe your video idea..."></textarea>
 
-<p class="subtitle">
-Create Amazing AI Video Ideas In Seconds
-</p>
-
-<label for="idea">Enter Your Video Idea</label>
-<textarea id="idea"
-placeholder="Example: A futuristic city in the year 2050..."></textarea>
-
-<label for="style">Select Video Style</label>
+<label>Video Style</label>
 <select id="style">
-  <option>Cinematic</option>
-  <option>Realistic</option>
-  <option>Anime</option>
-  <option>3D Animation</option>
-  <option>Fantasy</option>
-  <option>Documentary</option>
+<option>Anime</option>
+<option>Realistic</option>
+<option>Cinematic</option>
+<option>3D Animation</option>
+<option>Cartoon</option>
+<option>Fantasy</option>
+<option>Sci-Fi</option>
+<option>Nature</option>
 </select>
 
-<label for="ratio">Select Video Ratio</label>
-<select id="ratio">
-  <option value="16:9">16:9 - YouTube</option>
-  <option value="9:16">9:16 - TikTok / Reels</option>
-  <option value="1:1">1:1 - Square</option>
-</select>
-
-<label for="duration">Select Video Duration</label>
+<label>Video Duration</label>
 <select id="duration">
-  <option value="15 seconds">15 Seconds</option>
-  <option value="30 seconds">30 Seconds</option>
-  <option value="60 seconds">60 Seconds</option>
+<option value="1">1 Minute</option>
+<option value="2">2 Minutes</option>
+<option value="3">3 Minutes</option>
+<option value="4">4 Minutes</option>
+<option value="5">5 Minutes</option>
 </select>
 
-<button onclick="generateVideo()">
-Generate Video Idea
-</button>
+<label>Aspect Ratio</label>
+<select id="ratio">
+<option>16:9 (Landscape)</option>
+<option>9:16 (Portrait)</option>
+<option>1:1 (Square)</option>
+</select>
 
-<div id="result"></div>
+<label>Mood</label>
+<select id="mood">
+<option>Epic</option>
+<option>Emotional</option>
+<option>Mysterious</option>
+<option>Funny</option>
+<option>Peaceful</option>
+<option>Action</option>
+</select>
 
-<button id="downloadBtn" class="secondary"
-style="display:none" onclick="downloadResult()">
-Download Storyboard
-</button>
+<button onclick="makeStoryboard()">Create Storyboard</button>
+</div>
 
-<p class="footer">
-Powered by OKZ AI VIDEO MAKER
-</p>
-
+<div class="panel">
+<h2>Video Storyboard</h2>
+<div id="output">Your storyboard will appear here.</div>
+<button class="secondary" onclick="copyPrompt()">Copy Video Prompt</button>
+<button class="secondary" onclick="downloadStory()">Download Storyboard</button>
+<p class="notice">Note: This version creates video prompts and storyboards. Actual AI video rendering requires a secure video-generation backend.</p>
+</div>
 </div>
 
 <script>
-let generatedText = "";
+let currentPrompt = "";
 
-function generateVideo() {
-  const idea = document.getElementById("idea").value.trim();
-  const style = document.getElementById("style").value;
-  const ratio = document.getElementById("ratio").value;
-  const duration = document.getElementById("duration").value;
+function makeStoryboard(){
+ const idea=document.getElementById("idea").value.trim();
+ if(!idea){
+  alert("Please enter your video idea.");
+  return;
+ }
 
-  if (!idea) {
-    alert("Please enter your video idea first!");
-    return;
-  }
+ const style=document.getElementById("style").value;
+ const duration=Number(document.getElementById("duration").value);
+ const ratio=document.getElementById("ratio").value;
+ const mood=document.getElementById("mood").value;
 
-  generatedText =
-`OKZ AI VIDEO MAKER
-==================
+ const scenes=duration*4;
+ currentPrompt=
+ "Create a "+duration+" minute "+style+" video.\n"+
+ "Idea: "+idea+"\n"+
+ "Mood: "+mood+"\n"+
+ "Aspect ratio: "+ratio+"\n"+
+ "Visual quality: detailed, smooth animation, consistent characters, professional lighting.";
 
-VIDEO IDEA:
-${idea}
+ let result="VIDEO DETAILS\n";
+ result+="Style: "+style+"\nDuration: "+duration+" minute(s)\n";
+ result+="Aspect Ratio: "+ratio+"\nMood: "+mood+"\n\n";
+ result+="VIDEO PROMPT\n"+currentPrompt+"\n\n";
+ result+="STORYBOARD\n";
 
-VIDEO STYLE:
-${style}
+ for(let i=1;i<=scenes;i++){
+  result+="Scene "+i+": Show the next part of the story with "+style+
+  " visuals, consistent characters and "+mood.toLowerCase()+" atmosphere.\n";
+ }
 
-VIDEO RATIO:
-${ratio}
-
-VIDEO DURATION:
-${duration}
-
-AI VIDEO PROMPT:
-Create a ${style.toLowerCase()} video about ${idea}.
-Use a ${ratio} aspect ratio.
-Duration: ${duration}.
-Use beautiful visuals, smooth camera movements,
-professional lighting and high-quality details.
-
-STORYBOARD:
-
-SCENE 1 - INTRODUCTION
-Introduce the main idea with an attractive opening shot.
-
-SCENE 2 - DEVELOPMENT
-Show the main action with interesting camera angles.
-
-SCENE 3 - HIGHLIGHT
-Show the most exciting moment with cinematic visuals.
-
-SCENE 4 - ENDING
-Finish with a memorable final shot.
-`;
-
-  const result = document.getElementById("result");
-  result.textContent = generatedText;
-  result.style.display = "block";
-
-  document.getElementById("downloadBtn").style.display = "block";
+ document.getElementById("output").textContent=result;
 }
 
-function downloadResult() {
-  const blob = new Blob([generatedText], {
-    type: "text/plain"
-  });
+function copyPrompt(){
+ if(!currentPrompt){
+  alert("Create a storyboard first.");
+  return;
+ }
+ navigator.clipboard.writeText(currentPrompt)
+ .then(()=>alert("Prompt copied!"))
+ .catch(()=>alert("Copy is not available in this browser."));
+}
 
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-
-  link.href = url;
-  link.download = "OKZ-AI-Storyboard.txt";
-  link.click();
-
-  URL.revokeObjectURL(url);
+function downloadStory(){
+ const text=document.getElementById("output").textContent;
+ if(text==="Your storyboard will appear here."){
+  alert("Create a storyboard first.");
+  return;
+ }
+ const file=new Blob([text],{type:"text/plain"});
+ const link=document.createElement("a");
+ link.href=URL.createObjectURL(file);
+ link.download="OKZ-Video-Storyboard.txt";
+ link.click();
+ URL.revokeObjectURL(link.href);
 }
 </script>
-
 </body>
 </html>
